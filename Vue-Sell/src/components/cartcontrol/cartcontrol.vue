@@ -18,7 +18,6 @@
       }
     },
     created() {
-      console.log(this.food);
     },
     methods: {
       addCart(event) {
@@ -30,6 +29,7 @@
         } else {
           this.food.count++;
         }
+        this.$dispatch('cart.add', event.target);
       },
       decreaseCart(event) {
         if (!event._constructed) {
@@ -51,33 +51,33 @@
       padding: 6px
       transition: all 0.3s linear
       &.move-transition
-        opacity : 1
-        transform : translate3D(0, 0, 0)
+        opacity: 1
+        transform: translate3d(0, 0, 0)
         .inner
           display: inline-block
-          line-height : 24px
+          line-height: 24px
           font-size: 24px
           color: rgb(0, 160, 220)
           transition: all 0.5s linear
-          transform : rotate(0)
+          transform: rotate(0)
       &.move-enter, &.move-leave
         opacity: 0
-        transform : translate3D(24px, 0, 0)
+        transform: translate3d(24px, 0, 0)
         .inner
-          transform : rotate(180deg)
+          transform: rotate(180deg)
     .cart-count
       display: inline-block
       font-size: 10px
-      vertical-align : top
+      vertical-align: top
       width: 12px
       padding-top: 6px
-      line-height : 24px
-      text-align : center
+      line-height: 24px
+      text-align: center
       color: rgb(147, 153, 159)
     .cart-add
       display: inline-block
       padding: 6px
-      line-height : 24px
+      line-height: 24px
       font-size: 24px
       color: rgb(0, 160, 220)
 </style>
