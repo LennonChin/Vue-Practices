@@ -24,42 +24,42 @@
           </div>
         </div>
       </div>
-    </div>
-    <split></split>
-    <ratingselect :select-type="selectType" :only-content="onlyContent" :desc="desc" :ratings="ratings"></ratingselect>
-    <div class="rating-wrapper">
-      <ul>
-        <li v-for="rating in ratings" class="rating-item" v-show="needShow(rating.rateType, rating.text)">
-          <div class="avatar">
-            <img :src="rating.avatar" width="28px" height="28px">
-          </div>
-          <div class="content">
-            <h1 class="name">{{rating.username}}</h1>
-            <div class="star-wrapper">
-              <star :size="24" :score="rating.score"></star>
-              <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}</span>
+      <split></split>
+      <ratingselect :select-type="selectType" :only-content="onlyContent" :desc="desc" :ratings="ratings"></ratingselect>
+      <div class="rating-wrapper">
+        <ul>
+          <li v-for="rating in ratings" class="rating-item" v-show="needShow(rating.rateType, rating.text)">
+            <div class="avatar">
+              <img :src="rating.avatar" width="28px" height="28px">
             </div>
-            <p class="text">{{rating.text}}</p>
-            <div class="recommend" v-show="rating.recommend && rating.recommend.length">
-              <span class="icon-thumb_up"></span>
-              <span v-for="item in rating.recommend" class="item">{{item}}</span>
+            <div class="content">
+              <h1 class="name">{{rating.username}}</h1>
+              <div class="star-wrapper">
+                <star :size="24" :score="rating.score"></star>
+                <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}</span>
+              </div>
+              <p class="text">{{rating.text}}</p>
+              <div class="recommend" v-show="rating.recommend && rating.recommend.length">
+                <span class="icon-thumb_up"></span>
+                <span v-for="item in rating.recommend" class="item">{{item}}</span>
+              </div>
+              <div class="time">
+                {{rating.rateTime | formatDate}}
+              </div>
             </div>
-            <div class="time">
-              {{rating.rateTime | formatDate}}
-            </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import BScroll from 'better-scroll';
   import star from '../../components/star/star';
   import split from '../../components/split/split';
   import ratingselect from '../../components/ratingselect/ratingselect';
   import {formatDate} from '../../common/js/date';
+  import BScroll from 'better-scroll';
 
   const ALL = 2;
   const ERR_OK = 0;
@@ -83,12 +83,21 @@
         if (response.errno === ERR_OK) {
           this.ratings = response.data;
           this.$nextTick(() => {
-            this.scroll = new BScroll(this.$els.ratings, {
-              click: true
-            });
+            this._initScroll();
           });
         }
       });
+    },
+    ready() {
+      this._initScroll();
+    },
+    watch: {
+      'ratings'() {
+        this._initScroll();
+      },
+      'seller'() {
+        this._initScroll();
+      }
     },
     filters: {
       formatDate(time) {
@@ -97,6 +106,15 @@
       }
     },
     methods: {
+      _initScroll() {
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$els.ratings, {
+            click: true
+          });
+        } else {
+          this.scroll.refresh();
+        }
+      },
       needShow(type, text) {
         if (this.onlyContent && !text) {
           return false;
@@ -135,7 +153,7 @@
 
   .ratings
     position: absolute
-    top: 174px
+    top: 182px
     bottom: 0
     left: 0
     width: 100%
