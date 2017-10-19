@@ -28,7 +28,7 @@ export const getCategory = params => {
 export const getHotSearch = params => { return axios.get(`${host}/hotsearchs/`) }
 
 //获取商品列表
-export const getGoods = params => { return axios.get(`${host}/goods/`, { params: params }) }
+export const getGoods = params => { return axios.get(`${local_host}/goods/`, { params: params }) }
 
 //商品详情
 export const getGoodsDetail = goodId => { return axios.get(`${host}/goods/${goodId}`+'/') }
@@ -60,10 +60,10 @@ export const login = params => {
 
 //注册
 
-export const register = parmas => { return axios.post(`${host}/users/`, parmas) }
+export const register = parmas => { return axios.post(`${local_host}/users/`, parmas) }
 
 //短信
-export const getMessage = parmas => { return axios.post(`${host}/code/`, parmas) }
+export const getMessage = parmas => { return axios.post(`${local_host}/codes/`, parmas) }
 
 
 //获取用户信息
