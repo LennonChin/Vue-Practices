@@ -31,7 +31,7 @@ export const getHotSearch = params => { return axios.get(`${host}/hotsearchs/`) 
 export const getGoods = params => { return axios.get(`${local_host}/goods/`, { params: params }) }
 
 //商品详情
-export const getGoodsDetail = goodId => { return axios.get(`${host}/goods/${goodId}`+'/') }
+export const getGoodsDetail = goodId => { return axios.get(`${local_host}/goods/${goodId}`+'/') }
 
 //获取购物车商品
 export const getShopCarts = params => { return axios.get(`${host}/shopcarts/`) }
@@ -43,19 +43,19 @@ export const updateShopCart = (goodsId, params) => { return axios.patch(`${host}
 export const deleteShopCart = goodsId => { return axios.delete(`${host}/shopcarts/`+goodsId+'/') }
 
 //收藏
-export const addFav = params => { return axios.post(`${host}/userfavs/`, params) }
+export const addFav = params => { return axios.post(`${local_host}/userfavs/`, params) }
 
 //取消收藏
-export const delFav = goodsId => { return axios.delete(`${host}/userfavs/`+goodsId+'/') }
+export const delFav = goodsId => { return axios.delete(`${local_host}/userfavs/`+goodsId+'/') }
 
-export const getAllFavs = () => { return axios.get(`${host}/userfavs/`) }
+export const getAllFavs = () => { return axios.get(`${local_host}/userfavs/`) }
 
 //判断是否收藏
-export const getFav = goodsId => { return axios.get(`${host}/userfavs/`+goodsId+'/') }
+export const getFav = goodsId => { return axios.get(`${local_host}/userfavs/`+goodsId+'/') }
 
 //登录
 export const login = params => {
-  return axios.post(`${host}/login/`, params)
+  return axios.post(`${local_host}/login/`, params)
 }
 
 //注册
@@ -67,10 +67,10 @@ export const getMessage = parmas => { return axios.post(`${local_host}/codes/`, 
 
 
 //获取用户信息
-export const getUserDetail = () => { return axios.get(`${host}/users/1/`) }
+export const getUserDetail = () => { return axios.get(`${local_host}/users/1/`) }
 
 //修改用户信息
-export const updateUserInfo = params => { return axios.patch(`${host}/users/1/`, params) }
+export const updateUserInfo = params => { return axios.patch(`${local_host}/users/1/`, params) }
 
 
 //获取订单
@@ -84,13 +84,13 @@ export const getOrderDetail = orderId => {return axios.get(`${host}/orders/`+ord
 
 
 //获取留言
-export const getMessages = () => {return axios.get(`${host}/messages/`)}
+export const getMessages = () => {return axios.get(`${local_host}/messages/`)}
 
 //添加留言
-export const addMessage = params => {return axios.post(`${host}/messages/`, params, {headers:{ 'Content-Type': 'multipart/form-data' }})}
+export const addMessage = params => {return axios.post(`${local_host}/messages/`, params, {headers:{ 'Content-Type': 'multipart/form-data' }})}
 
 //删除留言
-export const delMessages = messageId => {return axios.delete(`${host}/messages/`+messageId+'/')}
+export const delMessages = messageId => {return axios.delete(`${local_host}/messages/`+messageId+'/')}
 
 //添加收货地址
 export const addAddress = params => {return axios.post(`${host}/address/`, params)}
