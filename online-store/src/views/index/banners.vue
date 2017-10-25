@@ -10,7 +10,7 @@
 </template>
 <style>
   .banner-warp{
-    height:300px;
+    height:405px;
   }
 </style>
 
